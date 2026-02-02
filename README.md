@@ -16,6 +16,10 @@ This project demonstrates how to use the STM32 I2S peripheral in DMA mode to acq
 - User button (B1)
 - Status LED (LD2)
 
+<p align="center">
+<img src="https://drive.google.com/uc?export=view&id=1k-mYVQVk2T5NjttuTqAW95a4pcD9Cpar" width="500">
+<p>
+
 ## How It Works
 1. **Initialization:**
    - I2S and UART peripherals are configured.
