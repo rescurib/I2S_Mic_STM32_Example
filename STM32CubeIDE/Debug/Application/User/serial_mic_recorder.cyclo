@@ -1,0 +1,6 @@
+D:/FirmwareProjects/I2S_Mic/Src/serial_mic_recorder.c:48:20:update_status_led	2
+D:/FirmwareProjects/I2S_Mic/Src/serial_mic_recorder.c:66:6:serial_recorder_loop	1
+D:/FirmwareProjects/I2S_Mic/Src/serial_mic_recorder.c:84:13:mic_start	3
+D:/FirmwareProjects/I2S_Mic/Src/serial_mic_recorder.c:111:13:mic_stop	2
+D:/FirmwareProjects/I2S_Mic/Src/serial_mic_recorder.c:131:6:HAL_GPIO_EXTI_Callback	3
+D:/FirmwareProjects/I2S_Mic/Src/serial_mic_recorder.c:153:6:HAL_I2S_RxCpltCallback	3

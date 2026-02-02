@@ -1,0 +1,50 @@
+# I2S Microphone Recorder Example
+
+This project demonstrates how to use the STM32 I2S peripheral in DMA mode to acquire audio data from an INMP441 digital MEMS microphone and stream it over UART.
+
+## Features
+- I2S audio acquisition from INMP441 MEMS microphone
+- DMA-based data transfer for efficient sampling
+- UART streaming of audio samples to a host PC
+- Start/stop recording with a user button (B1)
+- Status LED (LD2) indicates recording state
+
+## Hardware Requirements
+- STM32F3 series microcontroller (tested on STM32F303RE)
+- INMP441 MEMS microphone (I2S interface)
+- UART connection to host PC
+- User button (B1)
+- Status LED (LD2)
+
+## How It Works
+1. **Initialization:**
+   - I2S and UART peripherals are configured.
+   - The system waits in an idle loop.
+2. **Start/Stop Recording:**
+   - Press the user button (B1) to start or stop audio acquisition.
+   - The status LED (LD2) lights up when recording is active.
+3. **Data Acquisition:**
+   - Audio samples are acquired from the INMP441 via I2S using DMA.
+   - Each received stereo sample is sent over UART in a simple binary format.
+
+## UART Output Format
+Each audio frame sent over UART consists of:
+- Left channel: High byte
+- Left channel: Low byte
+- Right channel: High byte
+- Newline character (`\n`)
+
+## Usage
+1. Connect the INMP441 microphone to the STM32 I2S pins.
+2. Connect UART2 to your host PC and open a serial terminal (baud rate as configured in your project).
+3. Flash the firmware to your STM32 board.
+4. Press the user button (B1) to start/stop recording.
+5. Observe the status LED and monitor the UART output for audio data.
+
+## File Overview
+- `Src/serial_mic_recorder.c`: Main logic for I2S acquisition and UART streaming.
+- `Inc/serial_mic_recorder.h`: Function prototypes.
+- `I2S_Mic.ioc`: STM32CubeMX project configuration.
+
+## License
+This example is provided for educational purposes. See LICENSE files in the Drivers directories for third-party code.
