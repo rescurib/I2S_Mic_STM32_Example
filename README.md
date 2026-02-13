@@ -10,6 +10,7 @@ The I2S protocol is a kind of straight forward, at this point you might already 
 - UART streaming of audio samples to a host PC (460800 baudrate)
 - Start/stop recording with a user button (B1)
 - Status LED (LD2) indicates recording state
+- STM32CubeIDE and STM32CubeMX projects (so you can see all the configs you need)
 
 ## Hardware Requirements
 - STM32F3 series microcontroller (tested on STM32F303RE)
@@ -42,15 +43,23 @@ Each audio frame sent over UART consists of:
 
 ## Usage
 1. Connect the INMP441 microphone to the STM32 I2S pins.
-2. Connect UART2 to your host PC and open a serial terminal (baud rate as configured in your project).
+2. Connect UART2 to your host PC and open a serial terminal.
 3. Flash the firmware to your STM32 board.
 4. Press the user button (B1) to start/stop recording.
 5. Observe the status LED and monitor the UART output for audio data.
 
 ## File Overview
+
 - `Src/serial_mic_recorder.c`: Main logic for I2S acquisition and UART streaming.
 - `Inc/serial_mic_recorder.h`: Function prototypes.
 - `I2S_Mic.ioc`: STM32CubeMX project configuration.
 
-## License
-This example is provided for educational purposes. See LICENSE files in the Drivers directories for third-party code.
+## Recording and Saving Audio to WAV
+
+You can use `serial_to_wav.py` to record the audio data sent over UART and save it as a 24-bit mono WAV file on your PC.
+
+```sh
+python serial_to_wav.py --port COM12 --rate 8000 --output output.wav
+```
+
+The script will wait you for pressing the B1 button and then you will see "Mic acquisition: START" and record all incoming audio samples, and stop when you press the button again. The samples are then saved to the specified WAV file.
