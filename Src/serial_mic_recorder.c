@@ -167,11 +167,11 @@ void HAL_I2S_RxCpltCallback(I2S_HandleTypeDef *hi2s)
         return; // Not recording, ignore
     }
 
-    // Prepare buffer to send left and right channel data (high byte, low byte, high byte, newline)
+    // Prepare buffer to send left channel data (low byte, middle byte, high byte, newline)
     uint8_t send_buffer[4];
-    send_buffer[0] = (uint8_t)( (i2s_stereo_samples[0] >> 8) & 0x00FFU ); // Left channel high byte
-    send_buffer[1] = (uint8_t)( (i2s_stereo_samples[0])      & 0x00FFU ); // Left channel low byte
-    send_buffer[2] = (uint8_t)( (i2s_stereo_samples[1] >> 8) & 0x00FFU ); // Right channel high byte
+    send_buffer[0] = (uint8_t)( (i2s_stereo_samples[0] >> 8) & 0x00FFU ); 
+    send_buffer[1] = (uint8_t)( (i2s_stereo_samples[0])      & 0x00FFU ); 
+    send_buffer[2] = (uint8_t)( (i2s_stereo_samples[1] >> 8) & 0x00FFU ); 
     send_buffer[3] = '\n'; // Newline for framing
 
     // Transmit audio sample over UART (don't do this here in your actual project!)

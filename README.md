@@ -36,9 +36,9 @@ The I2S protocol is a kind of straight forward, at this point you might already 
 
 ## UART Output Format
 Each audio frame sent over UART consists of:
-- Left channel: High byte
-- Left channel: Low byte
-- Right channel: High byte
+- Left Chan Low byte
+- Left Chan Mid byte
+- Left Chan High byte
 - Newline character (`\n`)
 
 ## Usage
