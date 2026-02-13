@@ -2,10 +2,12 @@
 
 This project demonstrates how to use the STM32 I2S peripheral in DMA mode to acquire audio data from an INMP441 digital MEMS microphone and stream it over UART.
 
+The I2S protocol is a kind of straight forward, at this point you might already found docs like [this](https://www.nxp.com/docs/en/user-manual/UM11732.pdf) or [that](https://www.st.com/resource/en/application_note/an4309-interfacing-an-stm32l1xx-microcontroller-with-an-external-i2s-audio-codec-to-play-audio-files-stmicroelectronics.pdf). But perhaps you haven't come across simple examples, instead of complete applications where you have to dig deep to find out how the heck they made the I2S work on an STM32. That's why I'm publish this repo. Hope it helps.
+
 ## Features
 - I2S audio acquisition from INMP441 MEMS microphone
 - DMA-based data transfer for efficient sampling
-- UART streaming of audio samples to a host PC
+- UART streaming of audio samples to a host PC (460800 baudrate)
 - Start/stop recording with a user button (B1)
 - Status LED (LD2) indicates recording state
 

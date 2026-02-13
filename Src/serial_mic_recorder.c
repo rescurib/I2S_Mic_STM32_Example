@@ -85,7 +85,10 @@ static void mic_start(void)
 {
     if (!is_recording)
     {
-        // Start I2S DMA reception (2 words, 24 bits each)
+        /* Start I2S DMA reception (2 words, 24 bits each)
+         I know, this size argument is confusing since uint16_t* is used, 
+         but the HAL API expects it this way when 24 or 32 bit data formats are used. 
+        */
         if (HAL_I2S_Receive_DMA(&hi2s2, i2s_stereo_samples, 2U) == HAL_OK)
         {
            is_recording = true;
@@ -171,6 +174,6 @@ void HAL_I2S_RxCpltCallback(I2S_HandleTypeDef *hi2s)
     send_buffer[2] = (uint8_t)( (i2s_stereo_samples[1] >> 8) & 0x00FFU ); // Right channel high byte
     send_buffer[3] = '\n'; // Newline for framing
 
-    // Transmit audio sample over UART
+    // Transmit audio sample over UART (don't do this here in your actual project!)
     HAL_UART_Transmit(&huart2, send_buffer, sizeof(send_buffer), 10U);
 }
