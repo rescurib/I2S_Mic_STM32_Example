@@ -67,14 +67,10 @@ def main():
                 print('Mic acquisition: STOP')
                 break
             #Process 3 bytes + newline
-            if len(buffer) == 4:
-                data = buffer[:4]
-                if data[3] == ord('\n'):
-                    value = (data[2] << 16) | (data[1] << 8) | data[0]
-                    if value & 0x800000:
-                        value = value - 0x1000000
-                    samples.append(value)
-                    buffer = b''
+            if len(buffer) == 4 and buffer[3] == ord('\n'):
+              raw = buffer[:3][::-1]  # little-endian PCM
+              samples.append(raw)
+              buffer = b''
     ser.close()
     if samples:
         print('Saving {} samples to {}'.format(len(samples), args.output))
@@ -84,7 +80,7 @@ def main():
             wf.setframerate(args.rate)
             # Write samples as signed 24-bit little endian
             for s in samples:
-                wf.writeframesraw(s.to_bytes(3, byteorder='big', signed=True))
+                wf.writeframesraw(s)
         print('WAV file saved.')
     else:
         print('No samples received.')
