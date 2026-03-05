@@ -168,6 +168,20 @@ void HAL_I2S_RxCpltCallback(I2S_HandleTypeDef *hi2s)
     }
 
     // Prepare buffer to send left channel data (low byte, middle byte, high byte, newline)
+/* I2S Left Justified Data Format:
+ *
+*  WS:    ┌───────────────────────┐       
+*         │      Left Channel     │    Right Channel (disabled)               
+*  _______|                       |____________________________          
+* SCK:  _|‾|_|‾|_|‾|_|‾|_|‾|_|‾|_|‾|_|‾|_|‾|_|‾|_|‾|_|‾|_|‾|_|‾|
+*
+* SD:   <L23><L22>...<L0> <LZ>...<LZ> <RZ><RZ>...<RZ>.......<RZ>
+*       |<-24 valid bits-><-High-Z->|<--------- High-Z -------->|
+*
+*  - L = Left channel data bits (MSB first)
+*  - Z = High impedance (no valid data) 
+*  i2s_stereo_samples[1] & 0x00FFU contains the garbage padding.
+*/
     uint8_t send_buffer[4];
     send_buffer[0] = (uint8_t)( (i2s_stereo_samples[0] >> 8) & 0x00FFU ); 
     send_buffer[1] = (uint8_t)( (i2s_stereo_samples[0])      & 0x00FFU ); 
