@@ -1,6 +1,7 @@
 # Build directories
 Debug/
 Release/
+STM32CubeIDE/Debug/
 
 # Prerequisites
 *.d
@@ -61,3 +62,4 @@ dkms.conf
 # other
 *.list
 *.cyclo
+STM32CubeIDE/Debug/*.cyclo
