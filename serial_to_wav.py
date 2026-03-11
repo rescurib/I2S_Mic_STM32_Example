@@ -63,7 +63,7 @@ def main():
             continue
         
         if streaming:
-            if buffer == b"Mic acquisition: STOP\r\n":
+            if b"Mic acquisition: STOP" in buffer:
                 print('Mic acquisition: STOP')
                 break
             #Process 3 bytes + newline
